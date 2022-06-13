@@ -44,16 +44,20 @@ export class DashboardComponent implements OnInit {
         this.empDetail.reset();
       }
       else if(employ.id>=1 && employ.name.length=="" && employ.age>=21 && employ.age<=99 && employ.gender!=""){
-        alert("Employee Name is not entered!")
+        alert("Employee Name is not entered!");
+        noChange();
       }
       else if(employ.id>=1 && employ.name.length>=1 && employ.age>="" && employ.gender!=""){
-        alert("Employee Age is not entered!")
+        alert("Employee Age is not entered!");
+        noChange();
       }
       else if(employ.id>=1 && employ.name.length>=1 && employ.age>=21 && employ.age<=99 && employ.gender==""){
-        alert("Employee Gender is not selected!")
+        alert("Employee Gender is not selected!");
+        noChange();
       }
       else{
         alert("Data Insuffienct!");
+        noChange();
       }
     }
 
