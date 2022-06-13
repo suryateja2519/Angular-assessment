@@ -1,0 +1,116 @@
+<div class="container-fluid">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Employee Management System</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+    </nav>
+
+  <div>
+    <!--add table-->
+          <div>
+            <form [formGroup]="empDetail">
+              <div class="d-flex flex-direction-row">
+                <div class="mb-3">
+                    <label for="employeeId" class="m-auto">Employee ID </label>
+                    <input type="number" min="1" class="form-control"  formControlName="id" name="userName" id="employeeId">
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="m-auto">Name </label>
+                    <input type="text" class="form-control" style="width:300px" formControlName="name" id="name">
+                </div>
+                <div class="mb-3">
+                    <label for="age" class="m-auto">Age </label>
+                    <input type="number" min="21" max="99" class="form-control"  formControlName="age" id="age">
+                </div>
+                <div class="mb-3">
+                  <label for="gender" class="m-auto">Gender </label><br>
+                  <select name="gender" class="box" formControlName="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>  
+                              
+                </div>
+              </div>
+            </form>
+            <div class="mb-3">
+              
+              <button class="btn btn-primary" id="button" (click)="addEmployee()">Add Employee</button>
+
+            </div>
+            
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Employee ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let employee of empList">
+                  <td>{{employee.id}}</td>
+                  <td>{{employee.name}}</td>
+                  <td>{{employee.age}}</td>
+                  <td>{{employee.gender}}</td>
+                  <td>
+                      <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editEmployee" (click)="editEmployee(employee)">Edit</button>
+                      <button type="button" class="btn btn-outline-danger" (click)="deleteEmployee(employee)">Delete</button>
+                  </td>
+      
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+
+<!--edit table-->
+  <div class="modal fade" id="editEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit employee details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        
+            <form [formGroup]="empDetail">
+              <div class="mb-3">
+                <label for="employeeId" class="form-label">Employee ID </label>
+                <input type="number" min="1" formControlName="id" class="form-control" id="employeeId">
+              </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name </label>
+                    <input type="text" formControlName="name" class="form-control" id="name">
+                  </div>
+                <div class="mb-3">
+                    <label for="age" class="m-auto">Age </label>
+                    <input type="number" min="21" max="99" class="form-control"  formControlName="age" id="age">
+                </div>
+                <div class="mb-3">
+                  <label for="gender" class="form-label">Gender </label>
+                  <select name="gender" formControlName="gender" class="box">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="noChange()">Close</button>
+                    <button type="button" class="btn btn-outline-success" (click)="updateEmployee()" data-bs-dismiss="modal">Update </button>
+                  </div>
+              </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div> 
+
