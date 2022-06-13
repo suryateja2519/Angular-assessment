@@ -70,6 +70,8 @@ export class DashboardComponent implements OnInit {
     const i=this.empId.indexOf(this.empDetail.value.id);
     this.exId.push(this.empDetail.value.id);
     this.del.push(i);
+    this.empDetail.reset();
+    this.empId.splice(this.del[0],1);
   }
 
   updateEmployee() {
@@ -80,6 +82,7 @@ export class DashboardComponent implements OnInit {
       this.empList.splice(this.del[0],1,this.empDetail.value);
       this.empId.splice(this.del[0],1,this.empDetail.value.id);
       this.empId.push(this.exId[0]);
+      this.empId.push(this.del[0]);
       this.del.pop();
       this.exId.pop();
       this.noChange();
