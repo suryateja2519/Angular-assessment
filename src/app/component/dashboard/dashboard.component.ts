@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   empDetail !: FormGroup;
   empList : Employee[] = [];
   empId: any[]=[];
+  empId1: any[]=[];
   exId: any[]=[];
   del: any[]=[];
   empListId: any[]=[];
@@ -43,6 +44,7 @@ export class DashboardComponent implements OnInit {
     }
     else if(condition){
         this.empId.push(this.empDetail.value.id);
+        this.empId1.push(this.empDetail.value.id);
         this.empList.push(this.empDetail.value);
         this.empDetail.reset();
       }
@@ -65,42 +67,44 @@ export class DashboardComponent implements OnInit {
     }
 
   editEmployee(emp : Employee) {    
-
     this.empDetail.controls['id'].setValue(emp.id);
     this.empDetail.controls['name'].setValue(emp.name);
     this.empDetail.controls['age'].setValue(emp.age);
     this.empDetail.controls['gender'].setValue(emp.gender);
+    
     const i=this.empId.indexOf(this.empDetail.value.id);
     this.exId.push(this.empDetail.value.id);
     this.del.push(i);
     this.empId.splice(this.del[0],1);
     const j=this.empList.findIndex(x=>x.id===this.exId[0]);
     this.empListId.push(j);
-    console.log(j);
-    console.log(this.empDetail.value);
-
   }
 
   updateEmployee() {
     var employ=this.empDetail.value;
     var condition=employ.id>=1 && employ.name.length>=1 && employ.age>=21 && employ.age<=99 && employ.gender!="";
+    
     if (this.empId.includes(this.empDetail.value.id)){
       alert("This Employee Code is already existed in Database!") 
       this.reset();
-    }else if(this.exId[0]==this.empDetail.value.id && condition){
+    }
+
+    else if(this.exId[0]==this.empDetail.value.id && condition){
       this.empList.splice(this.empListId[0],1,this.empDetail.value);
       this.empId.splice(this.del[0],0,this.empDetail.value.id);
       this.reset();
     }
-    else if(this.exId[0]!=this.empDetail.value.id && condition){  
+
+    else if(this.exId[0]!=this.empDetail.value.id && condition && !this.empId1.includes(employ.id)){  
       this.empId.push(this.exId[0]);
       this.empId.push(this.empDetail.value.id);
       this.empList.splice(this.empListId[0],1,this.empDetail.value)
-
       this.reset();
     }
+
     else{
       alert("Data Insuiffienct!");
+      this.reset();
     }
 
 }
