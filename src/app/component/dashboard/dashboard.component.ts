@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
     var newId=this.empDetail.value.id;
     var employ=this.empDetail.value;
     var condition=employ.id>=1 && employ.name.length>=1 && employ.age>=21 && employ.age<=99 && employ.gender!="";
-    if (this.empId.includes(newId)) {
+    if (this.empId1.includes(newId)) {
       alert("This Employee Code is already existed in Database!");
       this.noChange();
     }
@@ -99,6 +99,10 @@ export class DashboardComponent implements OnInit {
       this.empId.push(this.exId[0]);
       this.empId.push(this.empDetail.value.id);
       this.empList.splice(this.empListId[0],1,this.empDetail.value)
+      this.reset();
+    }
+    else if (this.exId[0]!=this.empDetail.value.id && condition && this.empId1.includes(employ.id)){
+      alert("This Employee Code is already existed in Database!");
       this.reset();
     }
 
